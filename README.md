@@ -52,5 +52,5 @@ Ein kostenloses Apple-Konto signiert Apps für sieben Tage. SideStore kann die S
 ### Mit CachyOS verbinden und testen
 
 1. Starte auf dem PC `cargo run --release --locked`. Falls noch nicht eingerichtet, installiere das unter **iPhone verbinden** beschriebene WebMic-Zertifikat.
-2. Füge den vollständigen Terminal-Link samt dem Teil hinter `#` in die native App ein. Tippe auf **Mikrofon starten** und erlaube den Mikrofon- und lokalen Netzwerkzugriff.
+2. Tippe in der nativen App auf **QR-Code scannen**, erlaube den Kamerazugriff und scanne den Code aus dem PC-Terminal. Alternativ kannst du den vollständigen Terminal-Link samt dem Teil hinter `#` einfügen. Tippe auf **Mikrofon starten** und erlaube den Mikrofon- und lokalen Netzwerkzugriff.
 3. Wähle am PC **WebMic** als Eingang. Wenn der Pegel reagiert, sperre das iPhone und sprich weiter. Prüfe auch den Wechsel zu einer anderen App.

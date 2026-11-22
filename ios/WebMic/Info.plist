@@ -11,6 +11,8 @@
     <key>CFBundleShortVersionString</key><string>1.0</string>
     <key>CFBundleVersion</key><string>$(CURRENT_PROJECT_VERSION)</string>
     <key>LSRequiresIPhoneOS</key><true/>
+    <key>NSCameraUsageDescription</key>
+    <string>WebMic verwendet die Kamera, um den Verbindungs-QR-Code vom PC zu lesen.</string>
     <key>NSLocalNetworkUsageDescription</key>
     <string>WebMic sendet dein Mikrofonsignal an deinen PC im lokalen Netzwerk.</string>
     <key>NSMicrophoneUsageDescription</key>

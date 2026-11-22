@@ -37,6 +37,9 @@ jobs:
         run: |
           app="$RUNNER_TEMP/webmic-build/WebMic.app"
           test -x "$app/WebMic"
+          test -s "$app/Assets.car"
+          /usr/libexec/PlistBuddy -c 'Print :CFBundleIcons:CFBundlePrimaryIcon:CFBundleIconFiles:0' "$app/Info.plist"
+          /usr/libexec/PlistBuddy -c 'Print :NSCameraUsageDescription' "$app/Info.plist"
           test "$(/usr/libexec/PlistBuddy -c 'Print :UIBackgroundModes:0' "$app/Info.plist")" = audio
           test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$app/Info.plist")" = net.weneten.webmic
           mkdir -p "$RUNNER_TEMP/package/Payload"
