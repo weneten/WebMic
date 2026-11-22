@@ -17,6 +17,10 @@ concurrency:
 
 jobs:
   build:
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+      actions: write
     runs-on: macos-26
     timeout-minutes: 15
     steps:
@@ -42,9 +46,22 @@ jobs:
           ditto -c -k --keepParent Payload "$GITHUB_WORKSPACE/WebMic.ipa"
           unzip -t "$GITHUB_WORKSPACE/WebMic.ipa"
 
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: WebMic-iOS
-          path: WebMic.ipa
-          if-no-files-found: error
-          retention-days: 1
+
+      - name: Publish IPA to GitHub Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="ios-build-$GITHUB_RUN_NUMBER"
+          if gh release view "$tag" --json assets --jq '.assets[].name' 2>/dev/null | grep -Fxq WebMic.ipa; then
+            exit 0
+          fi
+          gh release create "$tag" WebMic.ipa \
+            --target "$GITHUB_SHA" --title "WebMic iOS – Build $GITHUB_RUN_NUMBER" \
+            --notes "Unsignierte IPA für SideStore. iOS 17 oder neuer. Commit: $GITHUB_SHA" \
+            --latest
+
+      - name: Remove legacy IPA artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --method DELETE "repos/$GITHUB_REPOSITORY/actions/artifacts/14763734750"
