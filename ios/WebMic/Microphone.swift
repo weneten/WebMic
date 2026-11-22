@@ -46,7 +46,8 @@ final class Microphone: ObservableObject {
                 throw MicrophoneError.noInput
             }
 
-            let (packets, continuation) = AsyncStream<Data>.makeStream(bufferingPolicy: .bufferingNewest(1))
+            // One tap callback can deliver several 40 ms packets at once.
+            let (packets, continuation) = AsyncStream<Data>.makeStream(bufferingPolicy: .bufferingNewest(12))
             input.installTap(onBus: 0, bufferSize: 960, format: nil) { buffer, _ in
                 encoder.encode(buffer, yield: continuation)
             }

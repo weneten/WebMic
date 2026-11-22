@@ -31,9 +31,19 @@ struct ServerLink: Sendable {
         config.timeoutIntervalForResource = 15
         let session = URLSession(configuration: config, delegate: NoRedirects(), delegateQueue: nil)
         defer { session.finishTasksAndInvalidate() }
+        let clock = ContinuousClock()
+        let packetDuration = Duration.milliseconds(40)
+        var sendAt = clock.now
         var connected = false
         for await packet in packets {
+            let now = clock.now
+            if !connected || sendAt.advanced(by: packetDuration) < now {
+                // Give the capture queue a packet of headroom when starting or recovering from a gap.
+                sendAt = now.advanced(by: packetDuration)
+            }
+            try await clock.sleep(until: sendAt, tolerance: .zero)
             try Task.checkCancellation()
+            sendAt = sendAt.advanced(by: packetDuration)
             var request = request(method: "POST")
             request.httpBody = packet
             do {
