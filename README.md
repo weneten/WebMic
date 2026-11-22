@@ -34,7 +34,7 @@ Die native App nutzt denselben Rust-Server und denselben HTTPS-Link wie Safari. 
 ### IPA laden
 
 1. Öffne [Actions → WebMic iOS](https://github.com/weneten/WebMic/actions/workflows/ios.yml). Der Workflow startet bei Änderungen am iPhone-Client auf `main`. Mit **Run workflow** kannst du ihn auch manuell starten.
-2. Öffne den erfolgreichen Lauf und klicke unter **Artifacts** auf **WebMic-iOS**. Melde dich dafür gegebenenfalls bei GitHub an. Entpacke das heruntergeladene ZIP. Darin liegt `WebMic.ipa`.
+2. Öffne den erfolgreichen Lauf und klicke unter **Artifacts** auf **WebMic-iOS**. Melde dich dafür gegebenenfalls bei GitHub an. Entpacke das heruntergeladene ZIP. Darin liegt `WebMic.ipa`. GitHub bewahrt das Artefakt einen Tag lang auf.
 3. Die IPA ist absichtlich unsigniert. GitHub benötigt deshalb weder ein Apple-Konto noch ein Entwicklerzertifikat.
 
 ### SideStore auf dem iPhone einrichten
