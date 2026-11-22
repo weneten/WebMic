@@ -140,7 +140,7 @@ private final class PCMEncoder: @unchecked Sendable {
 
     func encode(_ buffer: AVAudioPCMBuffer, yield continuation: AsyncStream<Data>.Continuation) {
         let capacity = AVAudioFrameCount(ceil(Double(buffer.frameLength) * output.sampleRate / buffer.format.sampleRate)) + 32
-        if converted == nil || converted!.frameCapacity < capacity {
+        if (converted?.frameCapacity ?? 0) < capacity {
             converted = AVAudioPCMBuffer(pcmFormat: output, frameCapacity: capacity)
         }
         guard let converted else { return }

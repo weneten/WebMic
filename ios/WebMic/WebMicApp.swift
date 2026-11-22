@@ -1,4 +1,5 @@
 import AVFAudio
+import Combine
 import SwiftUI
 
 @main
@@ -45,10 +46,10 @@ struct MicrophoneView: View {
             }
             .navigationTitle("WebMic")
         }
-        .onReceive(NotificationCenter.default.publisher(for: AVAudioSession.interruptionNotification)) { event in
+        .onReceive(NotificationCenter.default.publisher(for: AVAudioSession.interruptionNotification).receive(on: RunLoop.main)) { event in
             microphone.handleInterruption(event)
         }
-        .onReceive(NotificationCenter.default.publisher(for: .AVAudioEngineConfigurationChange)) { event in
+        .onReceive(NotificationCenter.default.publisher(for: .AVAudioEngineConfigurationChange).receive(on: RunLoop.main)) { event in
             microphone.handleInputChange(event)
         }
     }

@@ -27,7 +27,8 @@ struct ServerLink: Sendable {
     func transmit(_ packets: AsyncStream<Data>, onConnected: () -> Void) async throws {
         let config = URLSessionConfiguration.ephemeral
         config.waitsForConnectivity = true
-        config.timeoutIntervalForRequest = 5
+        config.timeoutIntervalForRequest = 7
+        config.timeoutIntervalForResource = 15
         let session = URLSession(configuration: config, delegate: NoRedirects(), delegateQueue: nil)
         defer { session.finishTasksAndInvalidate() }
         var connected = false
