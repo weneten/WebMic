@@ -20,7 +20,6 @@ jobs:
     if: github.ref == 'refs/heads/main'
     permissions:
       contents: write
-      actions: write
     runs-on: macos-26
     timeout-minutes: 15
     steps:
@@ -59,9 +58,3 @@ jobs:
             --target "$GITHUB_SHA" --title "WebMic iOS – Build $GITHUB_RUN_NUMBER" \
             --notes "Unsignierte IPA für SideStore. iOS 17 oder neuer. Commit: $GITHUB_SHA" \
             --latest
-
-      - name: Remove legacy IPA artifact
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh api --method DELETE "repos/$GITHUB_REPOSITORY/actions/artifacts/14763734750"
