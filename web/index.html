@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10171b">
+  <title>WebMic</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>WebMic</h1>
+    <p>Verwende dieses Handy als Mikrofon für deinen PC.</p>
+    <section aria-label="Mikrofon">
+      <div class="status">
+        <span id="indicator" aria-hidden="true"></span>
+        <span id="status" role="status">Bereit</span>
+      </div>
+      <label for="level">Mikrofonpegel</label>
+      <meter id="level" min="0" max="1" value="0" optimum=".75"></meter>
+      <button type="button" id="toggle">Mikrofon starten</button>
+    </section>
+    <p class="hint">Wähle am PC <strong>WebMic</strong> als Audioeingang.</p>
+  </main>
+</body>
+</html>
